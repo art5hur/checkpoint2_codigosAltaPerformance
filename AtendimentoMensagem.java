@@ -10,6 +10,7 @@ import fila.FilaSugestao;
 
 public class AtendimentoMensagem {
 
+	static String mensagem;
 	public static void main(String[] args) {
 		FilaReclamacao filaReclamacao = new FilaReclamacao();
 		FilaSugestao filaSugestao = new FilaSugestao();
@@ -19,7 +20,7 @@ public class AtendimentoMensagem {
 		String email;
 		int tel;
 		int motivoCont;
-		String mensagem;
+	//	String mensagem;
 
 		FilaMensagens filaMensagens = new FilaMensagens();
 		filaMensagens.init();
@@ -67,16 +68,16 @@ public class AtendimentoMensagem {
 					System.out.println("Dejesa inserir seu nome?");
 					respNome = le.next();
 
-					while (respNome.equalsIgnoreCase("sim") == false && respNome.equalsIgnoreCase("não") == false) {
+					while (!(respNome.equalsIgnoreCase("sim")) && !(respNome.equalsIgnoreCase("não"))) {
 						System.out.println("Sim ou não?");
 						respNome = le.next();
 
 					} // validação resposta
 
-					//if (respNome == "sim") {
+					if (respNome.equalsIgnoreCase("sim")) {
 						System.out.println("Nome:");
 						nome = le.next();
-					//}
+					}
 						
 						System.out.println("Email:");
 						email = le.next();
@@ -88,11 +89,17 @@ public class AtendimentoMensagem {
 					respNomeW = le.next();
 
 					// validar respNomeW
-
-					//if (respNomeW == "sim") {
+					while (!(respNomeW.equalsIgnoreCase("sim")) && !(respNomeW.equalsIgnoreCase("não"))) {
+						System.out.println("Sim ou não?");
+						respNomeW = le.next();
+						
+					} // validação resposta
+					if (respNomeW.equalsIgnoreCase("sim")) {
 						System.out.println("Nome:");
 						nome = le.next();
-					//}
+					}
+
+		
 					System.out.println("Telefone:");
 					tel = le.nextInt();
 
@@ -155,7 +162,7 @@ public class AtendimentoMensagem {
 						opAtend = le.next().toUpperCase().charAt(0);
 						while (opAtend != 'A' && opAtend != 'B') {
 							System.out.println("Digite corretamente: A ou B");
-							tipoMens = le.next().toUpperCase().charAt(0);
+							opAtend = le.next().toUpperCase().charAt(0);
 
 						} // validação resposta
 					
@@ -171,7 +178,7 @@ public class AtendimentoMensagem {
 
 						while (opAtend != 'A' && opAtend != 'B') {
 							System.out.println("Digite corretamente: A ou B");
-							tipoMens = le.next().toUpperCase().charAt(0);
+							opAtend = le.next().toUpperCase().charAt(0);
 
 						} // validação resposta
 						
@@ -184,9 +191,15 @@ public class AtendimentoMensagem {
 						System.out.println(
 								"Enviada resposta para cliente: sua solicitação já foi resolvida. Obrigado!!!");
 						break;
-					default:
-						System.out.println("Por favor aguarde, em breve você receberá resposta!");
-						// filaResolucao.enqueue(mensagem);
+					case 'B':
+						System.out.println("Por favor aguarde, em breve você receberá resposta!"); 
+						
+						Mensagem msg2 = new Mensagem(mensagem);
+
+						filaResolucao.enqueue(msg2);
+					//default:
+						//System.out.println("Por favor aguarde, em breve você receberá resposta!"); 
+						//filaResolucao.enqueue(msg);
 					}
 
 				} // fecha resolução (case 2)
